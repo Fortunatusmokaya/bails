@@ -23,6 +23,7 @@ enum QueryIds {
 	ADMIN_COUNT = '7130823597031706',
 	CHANGE_OWNER = '7341777602580933',
 	DELETE = '8316537688363079',
+ PROMOTE = '6947763008679779',
 	DEMOTE = '6551828931592903'
 }
 
@@ -237,6 +238,13 @@ export const makeNewsletterSocket = (config: SocketConfig) => {
 				user_id: user
 			})
 		},
+
+/**user is Lid, not Jid */
+newsletterPromote: async(jid: string, user: string) => {
+    await newsletterWMexQuery(jid, QueryIds.PROMOTE, {
+        user_id: user
+    })
+},
 
 		newsletterDelete: async(jid: string) => {
 			await newsletterWMexQuery(jid, QueryIds.DELETE)
